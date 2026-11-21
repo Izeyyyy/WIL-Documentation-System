@@ -15,7 +15,7 @@ The system is intended to help authorized office personnel register, identify, c
 - **Frontend:** JavaScript, React, Next.js
 - **Backend:** Next.js server-side functionality
 - **Database:** Supabase (PostgreSQL)
-- **External Integration:** Google Workspace APIs (Google Drive, Google Docs, and Google Sheets)
+- **External Integration:** Google Workspace APIs (Google Drive, Google Docs)
 
 ## Planned Core Features
 
