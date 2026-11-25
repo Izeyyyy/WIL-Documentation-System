@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./loginForm.module.css";
+import styles from "../../Assets/css/loginForm.module.css";
 
 // Point this at your backend's Google OAuth start route, or pass an
 // `onGoogleSignIn` prop (e.g. () => signIn("google") from next-auth).
