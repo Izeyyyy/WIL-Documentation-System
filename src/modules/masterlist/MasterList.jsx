@@ -1,9 +1,9 @@
-import Sidebar from "../dashboard/components/Sidebard";
-import TopBar from "../dashboard/components/TopBar";
-import { PageHeader, Toolbar } from "../dashboard/components/MasterListParts";
-import { StaffTable, AdminExplorer } from "../dashboard/components/MasterListViews";
-import shell from "../../Assets/css/Dashboard.module.css";
-import styles from "../../Assets/css/MasterList.module.css";
+import Sidebar from "../components/Sidebard";
+import TopBar from "../components/TopBar";
+import { PageHeader, Toolbar } from "../components/MasterListParts";
+import { StaffTable, AdminExplorer } from "../components/MasterListViews";
+import shell from "@/Assets/css/Dashboard.module.css";
+import styles from "@/Assets/css/MasterList.module.css";
 
 /**
  * Master List page (sidebar + top bar + list).
@@ -13,13 +13,13 @@ import styles from "../../Assets/css/MasterList.module.css";
  *   admin -> file-explorer style list (folders, files, selection bar)
  * user:  { name, roleLabel }
  * data:  props for the list, see StaffTable / AdminExplorer
- * onNavigate: called with "dashboard" or "masterlist" from the sidebar
+ * onNavigate: called with a page key from the sidebar
  */
 export default function MasterList({
   role = "staff",
   user = {},
   data = {},
-  onNavigate = (page) => {},
+  onNavigate = (_page) => {},
 }) {
   return (
     <div className={shell.shell}>

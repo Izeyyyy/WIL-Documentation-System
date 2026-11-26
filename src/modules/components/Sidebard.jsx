@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Icon from "./Icons";
-import logo from "../../../Assets/wildcat-logo.png";
-import styles from "../../../Assets/css/Sidebar.module.css";
+import styles from "@/Assets/css/Sidebar.module.css";
+import logo from "@/Assets/wildcat-logo.png";
 
 // Navigation, grouped like the Figma sidebar. `adminOnly` groups are hidden for staff.
 const GROUPS = [
@@ -39,7 +39,7 @@ const GROUPS = [
 ];
 
 // Only these pages exist in page.tsx so far. Add keys here as you build more.
-const AVAILABLE_PAGES = ["dashboard", "masterlist"];
+const AVAILABLE_PAGES = ["dashboard", "masterlist", "review"];
 
 /**
  * @param {{

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Icon from "./Icons";
-import styles from "../../../Assets/css/DashboardWidgets.module.css";
+import styles from "@/Assets/css/DashboardWidgets.module.css";
 
 /* ---------------- Page header ---------------- */
 

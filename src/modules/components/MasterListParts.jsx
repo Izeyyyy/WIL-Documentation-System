@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "../../../Assets/css/MasterList.module.css";
+import styles from "@/Assets/css/MasterList.module.css";
 
 export function Chevron() {
   return (

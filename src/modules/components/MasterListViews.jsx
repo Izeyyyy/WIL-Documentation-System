@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "../../../Assets/css/MasterListViews.module.css";
+import styles from "@/Assets/css/MasterListViews.module.css";
 
 /* ---------------- Staff: table of coded documents ---------------- */
 

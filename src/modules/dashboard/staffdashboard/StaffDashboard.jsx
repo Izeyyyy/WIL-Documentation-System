@@ -5,7 +5,7 @@ import {
   PurposeChart,
   SyncStatus,
   RecordsTable,
-} from "../components/DashboardWidgets";
+} from "../../components/DashboardWidgets";
 import styles from "../../../Assets/css/StaffDashboard.module.css";
 
 export default function StaffDashboard({ stats, 

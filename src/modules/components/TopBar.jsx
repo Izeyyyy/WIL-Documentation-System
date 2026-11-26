@@ -1,5 +1,5 @@
 import Icon from "./Icons";
-import styles from "../../../Assets/css/TopBar.module.css";
+import styles from "@/Assets/css/TopBar.module.css";
 function initials(name = "") {
   return name
     .split(" ")

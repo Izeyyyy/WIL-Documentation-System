@@ -1,14 +1,14 @@
-import Sidebar from "./components/Sidebard";
-import TopBar from "./components/TopBar";
+import Sidebar from "../components/Sidebard";
+import TopBar from "../components/TopBar";
 import AdminDashboard from "./admindashboard/AdminDashboard";
 import StaffDashboard from "./staffdashboard/StaffDashboard";
-import styles from "../../Assets/css/Dashboard.module.css";
+import styles from "@/Assets/css/Dashboard.module.css";
 
 export default function Dashboard({
   role = "admin",
   user = {},
   data = {},
-  onNavigate = (page) => {},
+  onNavigate = (_page) => {},
 }) {
   const Content = role === "admin" ? AdminDashboard : StaffDashboard;
 

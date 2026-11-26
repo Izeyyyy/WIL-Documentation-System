@@ -5,7 +5,7 @@ import {
   PurposeChart,
   SyncStatus,
   RecentDocuments,
-} from "../components/DashboardWidgets";
+} from "../../components/DashboardWidgets";
 import styles from "../../../Assets/css/AdminDashboard.module.css";
 
 export default function AdminDashboard({
