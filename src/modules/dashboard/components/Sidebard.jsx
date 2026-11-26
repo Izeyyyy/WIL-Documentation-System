@@ -38,11 +38,29 @@ const GROUPS = [
   },
 ];
 
+// Only these pages exist in page.tsx so far. Add keys here as you build more.
+const AVAILABLE_PAGES = ["dashboard", "masterlist"];
+
 /**
- * @param {{ role?: "admin" | "staff", active?: string, user?: { name?: string, roleLabel?: string } }} props
+ * @param {{
+ *   role?: "admin" | "staff",
+ *   active?: string,
+ *   user?: { name?: string, roleLabel?: string },
+ *   onNavigate?: (page: string) => void
+ * }} props
  */
-export default function Sidebar({ role = "admin", active = "dashboard", user = {} }) {
+export default function Sidebar({
+  role = "admin",
+  active = "dashboard",
+  user = {},
+  onNavigate = () => {},
+}) {
   const groups = GROUPS.filter((group) => !group.adminOnly || role === "admin");
+
+  function handleClick(event, key) {
+    event.preventDefault(); // stop the real navigation so the state isn't reset
+    if (AVAILABLE_PAGES.includes(key)) onNavigate(key);
+  }
 
   return (
     <aside className={styles.sidebar}>
@@ -59,6 +77,8 @@ export default function Sidebar({ role = "admin", active = "dashboard", user = {
                 <li key={item.key}>
                   <Link
                     href={item.href}
+                    prefetch={false}
+                    onClick={(event) => handleClick(event, item.key)}
                     className={`${styles.item} ${item.key === active ? styles.itemActive : ""}`}
                     aria-current={item.key === active ? "page" : undefined}
                   >
