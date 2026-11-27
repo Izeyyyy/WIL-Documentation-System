@@ -7,6 +7,8 @@ export type AuditAction =
   | "TEMPLATE_CREATED"
   | "TEMPLATE_UPDATED"
   | "TEMPLATE_DELETED"
-  | "USER_UPDATED";
+  | "USER_UPDATED"
+  | "DRIVE_CONFIG_CREATED"
+  | "DRIVE_CONFIG_UPDATED";
 
 export type AuditLog = Database["public"]["Tables"]["audit_logs"]["Row"];

@@ -18,6 +18,8 @@ export type UpdateDriveConfigData = Partial<
     | "shared_drive_name"
     | "auth_mode"
     | "poll_interval_minutes"
+    | "start_page_token"
+    | "last_synced_at"
   >
 >;
 

@@ -4,7 +4,7 @@ import {
   updateDriveConfig,
 } from "@/lib/repositories/drive-config-repository";
 import { ApiError } from "@/lib/utils/api-error";
-import { getAuthenticatedUser } from "@/lib/services/auth-service";
+import { logAudit } from "@/lib/services/audit.service";
 
 import type {
   CreateDriveConfigData,
@@ -16,10 +16,9 @@ export async function fetchDriveConfig() {
 }
 
 export async function configureDrive(
-  configData: Omit<CreateDriveConfigData, "configured_by">
+  configData: Omit<CreateDriveConfigData, "configured_by">,
+  actorId: string
 ) {
-  const user = await getAuthenticatedUser();
-
   const existingConfig = await getDriveConfig();
 
   if (existingConfig) {
@@ -29,14 +28,25 @@ export async function configureDrive(
     );
 }
 
-  return await createDriveConfig({
+  const config = await createDriveConfig({
     ...configData,
-    configured_by: user.id,
+    configured_by: actorId,
   });
+
+  await logAudit({
+    actorId,
+    action: "DRIVE_CONFIG_CREATED",
+    entityType: "drive_config",
+    entityId: String(config.id),
+    newValues: config,
+  });
+
+  return config;
 }
 
 export async function modifyDriveConfig(
-  configData: UpdateDriveConfigData
+  configData: UpdateDriveConfigData,
+  actorId: string
 ) {
   const existingConfig = await getDriveConfig();
 
@@ -47,5 +57,27 @@ export async function modifyDriveConfig(
     );
   }
 
-  return await updateDriveConfig(configData);
+  const updates: UpdateDriveConfigData = { ...configData };
+
+  // A different Drive invalidates the old Drive's change token and sync time.
+  if (
+    updates.shared_drive_id !== undefined &&
+    updates.shared_drive_id !== existingConfig.shared_drive_id
+  ) {
+    updates.start_page_token = null;
+    updates.last_synced_at = null;
+  }
+
+  const config = await updateDriveConfig(updates);
+
+  await logAudit({
+    actorId,
+    action: "DRIVE_CONFIG_UPDATED",
+    entityType: "drive_config",
+    entityId: String(config.id),
+    oldValues: existingConfig,
+    newValues: config,
+  });
+
+  return config;
 }

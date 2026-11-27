@@ -36,7 +36,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    await requireRole(["admin"]);
+    const user = await requireRole(["admin"]);
 
     const body = await parseRequestBody(request);
 
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const config = await configureDrive(validation.data);
+    const config = await configureDrive(validation.data, user.id);
 
     return NextResponse.json(
       { data: config },
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
 
 export async function PATCH(request: Request) {
   try {
-    await requireRole(["admin"]);
+    const user = await requireRole(["admin"]);
 
     const body = await parseRequestBody(request);
 
@@ -79,7 +79,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    const config = await modifyDriveConfig(validation.data);
+    const config = await modifyDriveConfig(validation.data, user.id);
 
     return NextResponse.json({
       data: config,
