@@ -1,0 +1,26 @@
+.page {
+  width: 100%;
+}
+
+.chartRow {
+  display: grid;
+  grid-template-columns: 380fr 380fr 316fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+@media (max-width: 1280px) {
+  .chartRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .chartRow > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 860px) {
+  .chartRow {
+    grid-template-columns: 1fr;
+  }
+}

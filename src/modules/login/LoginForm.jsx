@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import styles from "./loginForm.module.css";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import styles from "../../Assets/css/loginForm.module.css";
 
 // Point this at your backend's Google OAuth start route, or pass an
 // `onGoogleSignIn` prop (e.g. () => signIn("google") from next-auth).
 const GOOGLE_AUTH_URL = "/api/auth/google";
-const INACTIVITY_MINUTES = 20;
+export const INACTIVITY_MINUTES = 20;
 
 // Redirect to /?error=not_registered when sign-in is refused, and to
 // /?reason=timeout after an inactivity sign-out.
@@ -14,6 +15,10 @@ const ERRORS = {
   not_registered: {
     title: "Your account is not registered.",
     body: "Contact your Administrator to register your account.",
+  },
+  inactive: {
+    title: "Your account is inactive.",
+    body: "Contact your Administrator to reactivate your account.",
   },
   default: {
     title: "We couldn't sign you in.",
@@ -59,25 +64,36 @@ function InfoIcon() {
   );
 }
 
+// useSearchParams needs a Suspense boundary; the fallback is the same form
+// without banners, so the prerendered HTML still shows the sign-in card.
+/** @param {{ onGoogleSignIn?: () => unknown }} props */
 export default function LoginForm({ onGoogleSignIn }) {
-  const [error, setError] = useState(null);
-  const [notice, setNotice] = useState(null);
+  return (
+    <Suspense fallback={<LoginCard onGoogleSignIn={onGoogleSignIn} params={null} />}>
+      <LoginCardWithParams onGoogleSignIn={onGoogleSignIn} />
+    </Suspense>
+  );
+}
+
+function LoginCardWithParams({ onGoogleSignIn }) {
+  return <LoginCard onGoogleSignIn={onGoogleSignIn} params={useSearchParams()} />;
+}
+
+function LoginCard({ onGoogleSignIn, params }) {
+  // Read ?error= / ?reason= once (lazy initializers), so clearing the
+  // address bar below does not hide the banner.
+  const [error, setError] = useState(() => {
+    const code = params?.get("error");
+    return code ? ERRORS[code] || ERRORS.default : null;
+  });
+  const [notice, setNotice] = useState(() => NOTICES[params?.get("reason")] || null);
   const [loading, setLoading] = useState(false);
-  console.log("styles:", styles)
 
-  // Read ?error= / ?reason= once on load, then tidy the address bar.
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const errorCode = params.get("error");
-    const reasonCode = params.get("reason");
-
-    if (errorCode) setError(ERRORS[errorCode] || ERRORS.default);
-    if (reasonCode && NOTICES[reasonCode]) setNotice(NOTICES[reasonCode]);
-
-    if (errorCode || reasonCode) {
+    if (params?.get("error") || params?.get("reason")) {
       window.history.replaceState({}, "", window.location.pathname);
     }
-  }, []);
+  }, [params]);
 
   // Re-enable the button if the user returns with the browser's Back button.
   useEffect(() => {
@@ -97,6 +113,7 @@ export default function LoginForm({ onGoogleSignIn }) {
       if (onGoogleSignIn) {
         await onGoogleSignIn();
       } else {
+        // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- OAuth start is an API route, not a Next.js page
         window.location.assign(GOOGLE_AUTH_URL);
         return; // leaving the page, keep the button disabled
       }

@@ -1,0 +1,116 @@
+.page {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 26px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 18px;
+  color: #222;
+}
+
+/* ---------- Search + filters ---------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  margin-bottom: 18px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 1 440px;
+  min-width: 0;
+  height: 36px;
+  padding: 0 14px;
+  background: #f4f4f2;
+  border-radius: 6px;
+  color: #555;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  color: #111;
+}
+
+.search:focus-within {
+  outline: 2px solid #ffd102;
+}
+
+.filter,
+.viewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #dcdcd8;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter:hover,
+.viewBtn:hover {
+  background: #fafaf8;
+}
+
+.filter:focus-visible,
+.viewBtn:focus-visible {
+  outline: 2px solid #ffd102;
+  outline-offset: 1px;
+}
+
+.chev {
+  color: #444;
+}
+
+.views {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.viewActive {
+  background: #fff8cc;
+  border-color: #ffd102;
+}
+
+@media (max-width: 900px) {
+  .toolbar {
+    flex-wrap: wrap;
+  }
+  .search {
+    flex-basis: 100%;
+  }
+  .views {
+    margin-left: 0;
+  }
+}
