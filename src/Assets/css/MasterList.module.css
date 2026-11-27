@@ -60,7 +60,6 @@
   outline: 2px solid #ffd102;
 }
 
-.filter,
 .viewBtn {
   display: inline-flex;
   align-items: center;
@@ -77,12 +76,10 @@
   white-space: nowrap;
 }
 
-.filter:hover,
 .viewBtn:hover {
   background: #fafaf8;
 }
 
-.filter:focus-visible,
 .viewBtn:focus-visible {
   outline: 2px solid #ffd102;
   outline-offset: 1px;
@@ -113,4 +110,45 @@
   .views {
     margin-left: 0;
   }
+}
+
+/* ---------- Filter dropdowns ---------- */
+.filterWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.filter {
+  height: 36px;
+  min-width: 118px;
+  padding: 0 32px 0 14px;
+  font: inherit;
+  font-size: 13px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #dcdcd8;
+  border-radius: 4px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.filter:hover {
+  background: #fafaf8;
+}
+
+.filter:focus-visible {
+  outline: 2px solid #ffd102;
+  outline-offset: 1px;
+}
+
+.filterOn {
+  background: #fff8cc;
+  border-color: #ffd102;
+}
+
+.filterWrap .chev {
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  pointer-events: none;
 }

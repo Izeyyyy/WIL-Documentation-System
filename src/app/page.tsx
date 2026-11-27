@@ -7,10 +7,11 @@ import MasterList from "@/modules/masterlist/MasterList";
 import ReviewNewDocuments from "@/modules/review/ReviewNewDocument";
 import IncompleteRecords from "@/modules/incomplete/IncompleteRecords";
 import GenerateReport from "@/modules/generate/GenerateReport";
+import ReportTemplates from "@/modules/templates/ReportTemplates";
 
-type Page = "dashboard" | "masterlist" | "review" | "incomplete" | "generate";
+type Page = "dashboard" | "masterlist" | "review" | "incomplete" | "generate" | "templates";
 
-const PAGES: Page[] = ["dashboard", "masterlist", "review", "incomplete", "generate"];
+const PAGES: Page[] = ["dashboard", "masterlist", "review", "incomplete", "generate", "templates"   ];
 
 // DEV ONLY: skip the login and go straight to the app.
 // Set to false (or delete these two lines) before you push.
@@ -80,5 +81,8 @@ export default function Home() {
   if (page === "masterlist") {
     return <MasterList role={role} onNavigate={navigate} />;
   }
+  if (page === "templates") {
+    return <ReportTemplates role={role} onNavigate={navigate} />;
+  } 
   return <Dashboard role={role} onNavigate={navigate} />;
 }

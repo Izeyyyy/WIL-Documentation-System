@@ -51,18 +51,35 @@ export function PageHeader({
   );
 }
 
+// Starter choices for the three filters. Pass `options` to <Toolbar> to replace any list,
+// for example { owners: ["Alex Johnson", "Finance team"] } once your users are loaded.
+const DEFAULT_OPTIONS = {
+  fileTypes: ["PDF", "Word document", "Excel spreadsheet", "Slides", "Image", "Folder"],
+  owners: ["Owned by me", "Shared with me", "Finance team", "Records team"],
+  modified: ["Today", "Last 7 days", "Last 30 days", "Last 90 days", "This year"],
+};
+
 /**
  * Search box, three filter dropdowns and the List / Grid switch.
- * Props are all optional: onSearch(text), onFilter(name, value), onViewChange(view)
+ * Props are all optional:
+ *   options: { fileTypes, owners, modified }   (arrays of strings)
+ *   onSearch(text), onFilter(name, value), onViewChange(view)
+ * A filter's value is "" when nothing is chosen.
  */
-export function Toolbar({ onSearch, onFilter, onViewChange }) {
+export function Toolbar({ options = {}, onSearch, onFilter, onViewChange }) {
   const [view, setView] = useState("list");
+  const [filters, setFilters] = useState({ fileType: "", owner: "", modified: "" });
 
-  const filters = [
-    { key: "fileType", label: "File type" },
-    { key: "owner", label: "Owner" },
-    { key: "modified", label: "Modified" },
+  const filterList = [
+    { key: "fileType", label: "File type", choices: options.fileTypes?.length ? options.fileTypes : DEFAULT_OPTIONS.fileTypes },
+    { key: "owner", label: "Owner", choices: options.owners?.length ? options.owners : DEFAULT_OPTIONS.owners },
+    { key: "modified", label: "Modified", choices: options.modified?.length ? options.modified : DEFAULT_OPTIONS.modified },
   ];
+
+  function changeFilter(key, value) {
+    setFilters((f) => ({ ...f, [key]: value }));
+    onFilter?.(key, value);
+  }
 
   function changeView(next) {
     setView(next);
@@ -80,16 +97,21 @@ export function Toolbar({ onSearch, onFilter, onViewChange }) {
         />
       </label>
 
-      {filters.map((f) => (
-        <button
-          key={f.key}
-          type="button"
-          className={styles.filter}
-          onClick={() => onFilter?.(f.key)}
-        >
-          {f.label}
+      {filterList.map((f) => (
+        <span key={f.key} className={styles.filterWrap}>
+          <select
+            className={`${styles.filter} ${filters[f.key] ? styles.filterOn : ""}`}
+            value={filters[f.key]}
+            onChange={(e) => changeFilter(f.key, e.target.value)}
+            aria-label={f.label}
+          >
+            <option value="">{f.label}</option>
+            {f.choices.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
           <Chevron />
-        </button>
+        </span>
       ))}
 
       <div className={styles.views}>
