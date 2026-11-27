@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { ApiError } from "@/lib/utils/api-error";
-import type { Json } from "../../../types/database.types";
+import type { Json } from "@/types/database.types";
 import type { AuditAction, AuditLog } from "@/types/audit";
 
 export type LogAuditInput = {

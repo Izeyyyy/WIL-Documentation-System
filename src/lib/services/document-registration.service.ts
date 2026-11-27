@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { logAudit } from "@/lib/services/audit.service";
 import { ApiError } from "@/lib/utils/api-error";
-import type { Database } from "../../../types/database.types";
+import type { Database } from "@/types/database.types";
 
 type DocumentInsert = Database["public"]["Tables"]["documents"]["Insert"];
 type DriveFileInsert = Database["public"]["Tables"]["drive_files"]["Insert"];

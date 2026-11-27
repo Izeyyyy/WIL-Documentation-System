@@ -1,34 +1,13 @@
-export type UserRole =
-  | "admin"
-  | "staff"
-  | "viewer";
+import type { Database } from "@/types/database.types";
 
-export type RecordStatus =
-  | "complete"
-  | "incomplete"
-  | "archived";
+// Derived from the generated Supabase types so they cannot drift from the database.
+type DbEnums = Database["public"]["Enums"];
 
-export type RegistrationStatus =
-  | "unregistered"
-  | "registered"
-  | "ignored";
-
-export type SyncTrigger =
-  | "manual"
-  | "scheduled"
-  | "webhook";
-
-export type AuthMode =
-  | "oauth"
-  | "service_account";
-
-export type MatchTarget =
-  | "filename"
-  | "folder_path"
-  | "ocr_text";
-
-export type FieldSource =
-  | "user_input"
-  | "document"
-  | "ocr"
-  | "system";
+export type UserRole = DbEnums["user_role"];
+export type RecordStatus = DbEnums["record_status"];
+export type RegistrationStatus = DbEnums["reg_status"];
+export type CodeStatus = DbEnums["code_status"];
+export type SyncTrigger = DbEnums["sync_trigger"];
+export type AuthMode = DbEnums["auth_mode"];
+export type MatchTarget = DbEnums["match_target"];
+export type FieldSource = DbEnums["field_source"];

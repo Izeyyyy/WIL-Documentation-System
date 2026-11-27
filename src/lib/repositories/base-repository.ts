@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { ApiError } from "@/lib/utils/api-error";
-import type { Database } from "../../../types/database.types";
+import type { Database } from "@/types/database.types";
 
 type TableName = keyof Database["public"]["Tables"];
 
