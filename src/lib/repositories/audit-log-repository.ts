@@ -1,5 +1,5 @@
 
-import { createRepositoryClient } from "./base-repository";
+import { createRepositoryClient, getPage } from "./base-repository";
 import { ApiError } from "@/lib/utils/api-error";
 import type {
   AuditLog,
@@ -34,35 +34,14 @@ export async function getAuditLogs(
   page: number = 1,
   pageSize: number = 20
 ) {
-  const supabase = await createRepositoryClient();
+  const { rows, pagination } = await getPage<AuditLog>(
+    "audit_logs",
+    "*",
+    [["created_at", false], ["id", false]],
+    page,
+    pageSize,
+    "Failed to retrieve audit logs."
+  );
 
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
-
-  const { data, error, count } = await supabase
-    .from("audit_logs")
-    .select("*", { count: "exact" })
-    .order("created_at", { ascending: false })
-    .range(from, to);
-
-  if (error) {
-    console.error("Audit log retrieval failed:", error);
-
-    throw new ApiError(
-      "Failed to retrieve audit logs.",
-      500
-    );
-  }
-
-  const totalCount = count ?? 0;
-
-  return {
-    auditLogs: (data ?? []) as AuditLog[],
-    pagination: {
-      page,
-      pageSize,
-      totalCount,
-      totalPages: Math.ceil(totalCount / pageSize),
-    },
-  };
+  return { auditLogs: rows, pagination };
 }

@@ -1,12 +1,12 @@
 
-import { NextResponse } from "next/server";
+import { successResponse } from "@/lib/utils/api-response";
 import { requireRole } from "@/lib/services/authorization-service";
 import { getAuditLogs } from "@/lib/repositories/audit-log-repository";
 import { handleApiError } from "@/lib/utils/handle-api-error";
 
 export async function GET(request: Request) {
   try {
-    await requireRole(["admin", "staff", "viewer"]);
+    await requireRole(["admin"]);
 
     const { searchParams } = new URL(request.url);
 
@@ -25,11 +25,10 @@ export async function GET(request: Request) {
 
     const result = await getAuditLogs(page, pageSize);
 
-    return NextResponse.json({
-      success: true,
-      data: result.auditLogs,
-      pagination: result.pagination,
-    });
+    return successResponse(
+      result,
+      "Audit logs retrieved successfully."
+    );
   } catch (error) {
     return handleApiError(error);
   }
