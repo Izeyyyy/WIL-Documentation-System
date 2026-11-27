@@ -12,6 +12,6 @@ export async function resolve(specifier, context, next) {
   if (!url && specifier.startsWith(".") && context.parentURL?.endsWith(".ts")) {
     url = new URL(specifier, context.parentURL).href;
   }
-  if (url && !/\.\w+$/.test(url) && existsSync(fileURLToPath(url + ".ts"))) url += ".ts";
+  if (url && !existsSync(fileURLToPath(url)) && existsSync(fileURLToPath(url + ".ts"))) url += ".ts";
   return next(url ?? specifier, context);
 }

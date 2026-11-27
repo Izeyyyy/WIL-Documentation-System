@@ -1,35 +1,71 @@
-
-import { successResponse } from "@/lib/utils/api-response";
+import { NextResponse } from "next/server";
+import { z } from "zod";
+import { getAuditLogs } from "@/lib/services/audit.service";
 import { requireRole } from "@/lib/services/authorization-service";
-import { getAuditLogs } from "@/lib/repositories/audit-log-repository";
-import { handleApiError } from "@/lib/utils/handle-api-error";
+import { ApiError } from "@/lib/utils/api-error";
+import { toTimestampRange } from "@/lib/utils/date-range";
+
+const dateSchema = z.union([
+  z.iso.date(),
+  z.iso.datetime({ offset: true }),
+]);
+
+const querySchema = z
+  .object({
+    page: z.coerce.number().int().positive().default(1),
+    pageSize: z.coerce.number().int().positive().max(100).default(25),
+    actorId: z.uuid().optional(),
+    action: z.string().trim().min(1).max(100).optional(),
+    entityType: z.string().trim().min(1).max(100).optional(),
+    from: dateSchema.optional(),
+    to: dateSchema.optional(),
+  })
+  .refine(
+    ({ from, to }) => !from || !to || new Date(from) <= new Date(to),
+    { message: "from must be earlier than or equal to to." }
+  );
 
 export async function GET(request: Request) {
   try {
     await requireRole(["admin"]);
 
     const { searchParams } = new URL(request.url);
+    const parsed = querySchema.safeParse({
+      page: searchParams.get("page") ?? undefined,
+      pageSize: searchParams.get("pageSize") ?? undefined,
+      actorId: searchParams.get("actorId") ?? undefined,
+      action: searchParams.get("action") ?? undefined,
+      entityType: searchParams.get("entityType") ?? undefined,
+      from: searchParams.get("from") ?? undefined,
+      to: searchParams.get("to") ?? undefined,
+    });
 
-    const page = Math.max(
-      1,
-      Number(searchParams.get("page")) || 1
-    );
+    if (!parsed.success) {
+      return NextResponse.json(
+        { data: null, error: "Invalid audit log query parameters." },
+        { status: 400 }
+      );
+    }
 
-    const pageSize = Math.min(
-      100,
-      Math.max(
-        1,
-        Number(searchParams.get("pageSize")) || 20
-      )
-    );
+    const { page, pageSize, from, to, ...filters } = parsed.data;
+    const data = await getAuditLogs(page, pageSize, {
+      ...filters,
+      ...toTimestampRange(from, to),
+    });
 
-    const result = await getAuditLogs(page, pageSize);
-
-    return successResponse(
-      result,
-      "Audit logs retrieved successfully."
-    );
+    return NextResponse.json({ data, error: null });
   } catch (error) {
-    return handleApiError(error);
+    if (error instanceof ApiError) {
+      return NextResponse.json(
+        { data: null, error: error.message },
+        { status: error.statusCode }
+      );
+    }
+
+    console.error("Unexpected audit logs API error:", error);
+    return NextResponse.json(
+      { data: null, error: "An unexpected error occurred." },
+      { status: 500 }
+    );
   }
 }
