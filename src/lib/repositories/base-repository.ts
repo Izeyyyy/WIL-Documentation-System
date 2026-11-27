@@ -1,5 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { ApiError } from "@/lib/utils/api-error";
+import type { Database } from "../../../types/database.types";
+
+type TableName = keyof Database["public"]["Tables"];
 
 export async function createRepositoryClient() {
   return await createClient();
@@ -7,7 +10,7 @@ export async function createRepositoryClient() {
 
 /** Orders as [column, ascending]; the last one should be a unique tie-breaker. */
 export async function getPage<T>(
-  table: string,
+  table: TableName,
   columns: string,
   orders: [string, boolean][],
   page: number,

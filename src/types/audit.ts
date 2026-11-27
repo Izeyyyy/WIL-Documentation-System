@@ -6,6 +6,7 @@ export type AuditAction =
   | "DOCUMENT_VIEWED"
   | "TEMPLATE_CREATED"
   | "TEMPLATE_UPDATED"
-  | "TEMPLATE_DELETED";
+  | "TEMPLATE_DELETED"
+  | "USER_UPDATED";
 
 export type AuditLog = Database["public"]["Tables"]["audit_logs"]["Row"];

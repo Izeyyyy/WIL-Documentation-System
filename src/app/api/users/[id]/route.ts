@@ -3,7 +3,7 @@ import { successResponse } from "@/lib/utils/api-response";
 import { handleApiError } from "@/lib/utils/handle-api-error";
 import { requireRole } from "@/lib/services/authorization-service";
 import { getUserById, updateUser } from "@/lib/repositories/user-repository";
-import { logAuditEvent } from "@/lib/services/audit-log-service";
+import { logAudit } from "@/lib/services/audit.service";
 import { isUuid } from "@/lib/utils/is-uuid";
 import { ApiError } from "@/lib/utils/api-error";
 import type { UserRole } from "@/types/database-enums";
@@ -69,20 +69,17 @@ export async function PATCH(
       throw new ApiError("User not found.", 404);
     }
 
-    // Best-effort: the change is already saved, so a logging failure must not fail the request.
-    try {
-      await logAuditEvent({
-        action: "user.update",
-        entity_type: "profile",
-        entity_id: id,
-        old_values: Object.fromEntries(
-          Object.keys(updates).map((key) => [key, existingUser[key as keyof typeof updates]])
-        ),
-        new_values: updates,
-      });
-    } catch (auditError) {
-      console.error("Audit logging failed for user update:", auditError);
-    }
+    // Best-effort: logAudit logs and swallows its own errors, so a saved change never fails here.
+    await logAudit({
+      actorId: currentUser.id,
+      action: "USER_UPDATED",
+      entityType: "profile",
+      entityId: id,
+      oldValues: Object.fromEntries(
+        Object.keys(updates).map((key) => [key, existingUser[key as keyof typeof updates]])
+      ),
+      newValues: updates,
+    });
 
     return successResponse(
       updatedUser,
