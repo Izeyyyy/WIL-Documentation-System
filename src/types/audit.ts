@@ -1,4 +1,4 @@
-import type { Database } from "../../types/database.types";
+import type { Database } from "@/types/database.types";
 
 export type AuditAction =
   | "DOCUMENT_REGISTERED"
@@ -6,6 +6,9 @@ export type AuditAction =
   | "DOCUMENT_VIEWED"
   | "TEMPLATE_CREATED"
   | "TEMPLATE_UPDATED"
-  | "TEMPLATE_DELETED";
+  | "TEMPLATE_DELETED"
+  | "USER_UPDATED"
+  | "DRIVE_CONFIG_CREATED"
+  | "DRIVE_CONFIG_UPDATED";
 
 export type AuditLog = Database["public"]["Tables"]["audit_logs"]["Row"];

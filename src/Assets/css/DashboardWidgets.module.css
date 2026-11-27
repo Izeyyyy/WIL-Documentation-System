@@ -1,0 +1,487 @@
+/* ---------- Page header ---------- */
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #111;
+}
+
+.pageSubtitle {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #313333;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 31px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  background: #ffd102;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryBtn:hover {
+  background: #f0c400;
+}
+
+/* ---------- Shared card ---------- */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+}
+
+.empty {
+  margin: 0;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  color: #85857f;
+}
+
+/* ---------- Stat cards ---------- */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 122px;
+  padding: 18px 20px 17px;
+}
+
+.statLabel {
+  margin: 0;
+  font-size: 12px;
+  color: #313333;
+}
+
+.statValue {
+  margin: 10px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #111;
+}
+
+.statFoot {
+  display: flex;
+  gap: 10px;
+  min-height: 12px;
+  margin: auto 0 0;
+  font-size: 10px;
+  color: #313333;
+}
+
+.statFoot strong {
+  font-weight: 500;
+  color: #000;
+}
+
+/* ---------- Charts ---------- */
+.chartCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 253px;
+  padding: 22px 20px 20px;
+}
+
+.columns {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+.columnValue {
+  font-size: 10px;
+  font-weight: 600;
+  color: #000;
+}
+
+.columnTrack {
+  flex: 1;
+  width: 23px;
+  display: flex;
+  align-items: flex-end;
+  margin: 4px 0 6px;
+}
+
+.columnBar {
+  width: 100%;
+  min-height: 2px;
+  background: #ffd102;
+  border-radius: 4px;
+}
+
+.columnLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #000;
+}
+
+.bars {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 11px;
+  flex: 1;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 64px 1fr 24px;
+  align-items: center;
+  gap: 8px;
+}
+
+.barLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #000;
+}
+
+.barTrack {
+  height: 13px;
+  background: rgba(188, 188, 188, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: #ffd102;
+  border-radius: 4px;
+}
+
+.barValue {
+  font-size: 10px;
+  font-weight: 600;
+  color: #000;
+  text-align: right;
+}
+
+/* ---------- Sync status ---------- */
+.syncCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 253px;
+  padding: 16px 19px 20px;
+}
+
+.syncHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 18px;
+}
+
+.syncTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.syncPill {
+  padding: 2px 11px;
+  background: rgba(24, 213, 65, 0.3);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.syncList {
+  margin: 14px 0 0;
+  flex: 1;
+}
+
+.syncRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 32px;
+}
+
+.syncRow dt {
+  max-width: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.syncRow dd {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  text-align: right;
+}
+
+.syncBig {
+  font-size: 20px !important;
+}
+
+.syncBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  align-self: center;
+  width: min(221px, 100%);
+  height: 45px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+}
+
+.syncBtn:hover {
+  background: #f7f7f5;
+}
+
+/* ---------- Tables ---------- */
+.scroll {
+  overflow-x: auto;
+}
+
+.emptyRow {
+  margin: 0;
+  padding: 36px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #85857f;
+}
+
+.chip {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Recent documents (admin) */
+.tableCard {
+  margin-top: 48px;
+  padding: 20px;
+}
+
+.tableHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.viewAll {
+  font-size: 11px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.docRow {
+  display: grid;
+  grid-template-columns: minmax(260px, 2.6fr) minmax(70px, 1fr) minmax(90px, 1.05fr) minmax(100px, 0.9fr);
+  align-items: center;
+  gap: 16px;
+  min-width: 640px;
+}
+
+.docHeader {
+  margin-top: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e1e1db;
+  font-size: 10px;
+  font-weight: 500;
+  color: #313333;
+}
+
+.docBody {
+  padding: 12px 0;
+  border-bottom: 1px solid #e1e1db;
+}
+
+.docBody:last-child {
+  border-bottom: 0;
+}
+
+.docName {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.fileBadge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.filePdf {
+  background: #fceeeb;
+  color: #b8523a;
+}
+
+.fileDoc {
+  background: #eaf0fc;
+  color: #4868aa;
+}
+
+.fileXls {
+  background: #e8f4ed;
+  color: #26764c;
+}
+
+.docTitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #111;
+}
+
+.docSub {
+  margin: 4px 0 0;
+  font-size: 10px;
+  color: #313333;
+}
+
+.cellText {
+  font-size: 11px;
+  color: #313333;
+}
+
+.chipApproved {
+  background: #fff6cb;
+  color: #000;
+}
+
+.chipReview {
+  background: #fff4df;
+  color: #99641f;
+}
+
+.chipDraft {
+  background: #f7f7f5;
+  color: #313333;
+}
+
+/* Records table (staff) */
+.recordsCard {
+  margin-top: 48px;
+  background: #fff;
+  border: 1px solid #e0e0dc;
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.recRow {
+  display: grid;
+  grid-template-columns: minmax(170px, 1.6fr) minmax(220px, 3.1fr) minmax(70px, 0.8fr) minmax(90px, 1.1fr) minmax(110px, 1.5fr) minmax(110px, 1fr);
+  align-items: center;
+  gap: 12px;
+  min-width: 860px;
+  padding: 0 15px;
+}
+
+.recHeader {
+  height: 44px;
+  background: #f5f5f3;
+  font-size: 12px;
+  font-weight: 500;
+  color: #77776f;
+}
+
+.recBody {
+  height: 56px;
+  border-top: 1px solid #e4e4e0;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.recCode {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.chipProvisional {
+  background: #fdefc8;
+  color: #9a5b00;
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+.chipConfirmed {
+  background: #e3f1ea;
+  color: #1e6a43;
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+/* ---------- Narrower screens ---------- */
+@media (max-width: 1280px) {
+  .statGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+

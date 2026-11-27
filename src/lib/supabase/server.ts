@@ -1,7 +1,7 @@
 
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import type { Database } from "../../../types/database.types";
+import type { Database } from "@/types/database.types";
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -21,7 +21,7 @@ export async function createClient() {
             );
           } catch {
             // Cookie updates may be unavailable in Server Components.
-            // Middleware will handle session refreshes.
+            // Proxy (src/proxy.ts) will handle session refreshes.
           }
         },
       },
