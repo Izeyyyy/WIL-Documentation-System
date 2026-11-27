@@ -4,12 +4,15 @@ import { registerDocument } from "@/lib/services/document-registration.service";
 import { requireRole } from "@/lib/services/authorization-service";
 import { ApiError } from "@/lib/utils/api-error";
 
+// TODO: driveFileId, name, mimeType and sizeBytes are trusted from the client. Fetch them
+// server-side from Google Drive (by driveFileId) once the Drive client exists.
 const requestSchema = z.object({
   driveFileId: z.string().trim().min(1),
   name: z.string().trim().min(1),
   mimeType: z.string().trim().min(1),
   sizeBytes: z.number().int().nonnegative(),
-  webViewLink: z.url(),
+  // Stored and rendered as a link, so only https Google Drive / Docs URLs (no javascript: etc).
+  webViewLink: z.url({ protocol: /^https$/, hostname: /^(drive|docs)\.google\.com$/ }),
   title: z.string().trim().min(1),
   categoryCode: z.string().trim().min(1),
   purposeCode: z.string().trim().min(1),
