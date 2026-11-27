@@ -40,7 +40,7 @@ const GROUPS = [
 ];
 
 // Only these pages exist in page.tsx so far. Add keys here as you build more.
-const AVAILABLE_PAGES = ["dashboard", "masterlist", "review"];
+const AVAILABLE_PAGES = ["dashboard", "masterlist", "review" , "incomplete", "generate", "templates", "users", "codes", "drive", "audit"];
 
 /**
  * @param {{
