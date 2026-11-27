@@ -7,7 +7,7 @@ import styles from "../../Assets/css/loginForm.module.css";
 // Point this at your backend's Google OAuth start route, or pass an
 // `onGoogleSignIn` prop (e.g. () => signIn("google") from next-auth).
 const GOOGLE_AUTH_URL = "/api/auth/google";
-const INACTIVITY_MINUTES = 20;
+export const INACTIVITY_MINUTES = 20;
 
 // Redirect to /?error=not_registered when sign-in is refused, and to
 // /?reason=timeout after an inactivity sign-out.
@@ -15,6 +15,10 @@ const ERRORS = {
   not_registered: {
     title: "Your account is not registered.",
     body: "Contact your Administrator to register your account.",
+  },
+  inactive: {
+    title: "Your account is inactive.",
+    body: "Contact your Administrator to reactivate your account.",
   },
   default: {
     title: "We couldn't sign you in.",
