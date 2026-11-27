@@ -1,0 +1,284 @@
+.card {
+  background: #fff;
+  border: 1px solid #e4e4e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.empty {
+  margin: 0;
+  padding: 56px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
+
+/* ---------- Staff table ---------- */
+.staffGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 2.4fr 0.7fr 1fr 1.2fr 1fr;
+  align-items: center;
+  column-gap: 16px;
+  padding: 0 16px;
+}
+
+.staffHead {
+  height: 46px;
+  font-size: 13px;
+  color: #555;
+  background: #f7f7f5;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.staffRow {
+  min-height: 56px;
+  font-size: 14px;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.staffRow:last-child {
+  border-bottom: 0;
+}
+
+.code {
+  font-weight: 700;
+}
+
+.pill {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+}
+
+.pillWarn {
+  background: #fff1b8;
+  color: #7a5a00;
+}
+
+.pillOk {
+  background: #dff1e5;
+  color: #1d6b3a;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 0 30px;
+}
+
+.showing {
+  margin: 0;
+  font-size: 14px;
+}
+
+.pager {
+  display: flex;
+  gap: 12px;
+}
+
+.pagerBtn {
+  height: 30px;
+  padding: 0 20px;
+  font: inherit;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #111;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagerBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Admin explorer ---------- */
+.explorer {
+  padding: 18px 16px 24px;
+}
+
+.crumbs {
+  font-size: 12px;
+  color: #333;
+  padding: 0 2px;
+}
+
+.crumbSlash {
+  margin: 0 6px;
+}
+
+.crumbCurrent {
+  font-weight: 700;
+  color: #111;
+}
+
+.folderHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 22px 0 14px;
+  padding: 0 2px;
+}
+
+.folderTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.folderCount {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #333;
+}
+
+.shareBtn {
+  height: 36px;
+  padding: 0 18px;
+  font: inherit;
+  font-size: 13px;
+  background: #fff;
+  border: 1px solid #dcdcd8;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selectionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 43px;
+  padding: 0 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  background: #fff6c2;
+}
+
+.selectionActions {
+  display: flex;
+  gap: 22px;
+}
+
+.selectionActions button {
+  padding: 0;
+  font: inherit;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.fileGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px 160px;
+  align-items: center;
+  column-gap: 16px;
+  padding: 0 14px;
+}
+
+.fileHead {
+  height: 40px;
+  font-size: 11px;
+  color: #444;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.nameHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.box {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid #333;
+}
+
+.fileRow {
+  min-height: 60px;
+  font-size: 11px;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.fileRowOn {
+  background: #fffbe0;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 38px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 6px;
+  background: #eee;
+}
+
+.badgePDF {
+  background: #fdeaea;
+  color: #c0392b;
+}
+
+.badgeXLS {
+  background: #e3f4e8;
+  color: #1d6b3a;
+}
+
+.badgeDOC {
+  background: #e6edfb;
+  color: #2c4fa3;
+}
+
+.fileName {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.fileMeta {
+  display: block;
+  margin-top: 4px;
+  color: #555;
+}
+
+.explorerFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px 14px 0;
+  font-size: 11px;
+}
+
+.pages {
+  font-size: 12px;
+  margin-right: 34%;
+}
+
+@media (max-width: 900px) {
+  .staffGrid {
+    grid-template-columns: 1.4fr 2fr 1fr;
+  }
+  .staffGrid > :nth-child(3),
+  .staffGrid > :nth-child(4) {
+    display: none;
+  }
+  .fileGrid {
+    grid-template-columns: minmax(0, 1fr) 120px;
+  }
+  .fileGrid > :nth-child(3) {
+    display: none;
+  }
+}
