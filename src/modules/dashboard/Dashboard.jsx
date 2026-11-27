@@ -8,7 +8,7 @@ export default function Dashboard({
   role = "admin",
   user = {},
   data = {},
-  onNavigate = (_page) => {},
+  onNavigate = () => {},
 }) {
   const Content = role === "admin" ? AdminDashboard : StaffDashboard;
 

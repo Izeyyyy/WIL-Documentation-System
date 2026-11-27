@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   if (!isLoggedIn) {
-    // Temporary: skips real Google OAuth. Replace with your real sign-in later.
+    // TODO: fake sign-in (any click logs in, role fixed to "staff", no session). Replace with real Google OAuth before deployment.
     return <LoginForm onGoogleSignIn={() => setIsLoggedIn(true)} />;
   }
 

@@ -49,7 +49,7 @@ export function StaffTable({ rows = [], total = 0, page = 1, pageSize = 8, onPre
 
       <div className={styles.footer}>
         <p className={styles.showing}>
-          {rows.length ? `Showing ${start} -${end} of ${total}` : "Showing 0 of 0"}
+          {rows.length ? `Showing ${start}-${end} of ${total}` : "Showing 0 of 0"}
         </p>
         <div className={styles.pager}>
           <button type="button" className={styles.pagerBtn} onClick={onPrevious} disabled={page <= 1}>

@@ -19,7 +19,7 @@ export default function MasterList({
   role = "staff",
   user = {},
   data = {},
-  onNavigate = (_page) => {},
+  onNavigate = () => {},
 }) {
   return (
     <div className={shell.shell}>

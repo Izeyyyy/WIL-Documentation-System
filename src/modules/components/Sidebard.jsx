@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Icon from "./Icons";
 import styles from "@/Assets/css/Sidebar.module.css";
@@ -65,7 +66,7 @@ export default function Sidebar({
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <img src={logo.src} alt="Wildcat Innovation Labs" className={styles.logoImg} />
+        <Image src={logo} alt="Wildcat Innovation Labs" className={styles.logoImg} priority />
       </div>
 
       <nav className={styles.nav} aria-label="Main">

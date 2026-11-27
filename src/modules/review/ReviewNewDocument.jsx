@@ -37,7 +37,7 @@ export default function ReviewNewDocuments({
   role = "staff",
   user = {},
   data = {},
-  onNavigate = (_page) => {},
+  onNavigate = () => {},
 }) {
   const { counts = {}, files = [], detail, onSelect, provisional = {}, ...actions } = data;
   const [tab, setTab] = useState("needs");
