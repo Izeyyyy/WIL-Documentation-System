@@ -12,7 +12,7 @@ The system is intended to help authorized office personnel register, identify, c
 
 ## Technology Stack
 
-- **Frontend:** JavaScript, React, Next.js
+- **Frontend:** TypeScript, React, Next.js
 - **Backend:** Next.js server-side functionality
 - **Database:** Supabase (PostgreSQL)
 - **External Integration:** Google Workspace APIs (Google Drive, Google Docs)
@@ -44,7 +44,11 @@ project/
 
 ## Development Setup
 
-Development setup instructions will be added once the application structure and dependencies have been established.
+1. Install dependencies: `npm ci`
+2. Copy `.env.example` to `.env.local` and fill in `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+3. Start the dev server: `npm run dev`
+
+Checks: `npm run lint`, `npm test`, `npm run build`.
 
 ## Environment Variables
 
