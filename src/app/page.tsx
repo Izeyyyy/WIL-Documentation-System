@@ -6,10 +6,11 @@ import Dashboard from "@/modules/dashboard/Dashboard";
 import MasterList from "@/modules/masterlist/MasterList";
 import ReviewNewDocuments from "@/modules/review/ReviewNewDocument";
 import IncompleteRecords from "@/modules/incomplete/IncompleteRecords";
+import GenerateReport from "@/modules/generate/GenerateReport";
 
-type Page = "dashboard" | "masterlist" | "review" | "incomplete";
+type Page = "dashboard" | "masterlist" | "review" | "incomplete" | "generate";
 
-const PAGES: Page[] = ["dashboard", "masterlist", "review", "incomplete"];
+const PAGES: Page[] = ["dashboard", "masterlist", "review", "incomplete", "generate"];
 
 // DEV ONLY: skip the login and go straight to the app.
 // Set to false (or delete these two lines) before you push.
@@ -56,6 +57,7 @@ export default function Home() {
     };
   }, [me]);
 
+  // Ignores keys for pages that don't exist yet (templates, users, ...).
   const navigate = (p?: string) => {
     if (p === undefined) return;
     if ((PAGES as string[]).includes(p)) setPage(p as Page);
@@ -71,6 +73,9 @@ export default function Home() {
   }
   if (page === "incomplete") {
     return <IncompleteRecords role={role} onNavigate={navigate} />;
+  }
+  if (page === "generate") {
+    return <GenerateReport role={role} onNavigate={navigate} />;
   }
   if (page === "masterlist") {
     return <MasterList role={role} onNavigate={navigate} />;
