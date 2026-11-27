@@ -1,28 +1,26 @@
 
-import { successResponse } from "@/lib/utils/api-response";
+import { successResponse, errorResponse } from "@/lib/utils/api-response";
 import { handleApiError } from "@/lib/utils/handle-api-error";
 import { requireRole } from "@/lib/services/authorization-service";
-import { createRepositoryClient } from "@/lib/repositories/base-repository";
-import type { UserProfile } from "@/types/user";
-import { ApiError } from "@/lib/utils/api-error";
+import { getUsers } from "@/lib/repositories/user-repository";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     await requireRole(["admin"]);
 
-    const supabase = await createRepositoryClient();
+    const { searchParams } = new URL(request.url);
 
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .order("created_at", { ascending: false });
+    const page = Number(searchParams.get("page") ?? 1);
+    const pageSize = 25;
 
-    if (error) {
-      throw new ApiError("Failed to retrieve users.", 500);
+    if (!Number.isInteger(page) || page < 1) {
+      return errorResponse("Invalid Page Number", 400);
     }
 
+    const result = await getUsers(page, pageSize);
+
     return successResponse(
-      data as UserProfile[],
+      result,
       "Users retrieved successfully."
     );
   } catch (error) {
