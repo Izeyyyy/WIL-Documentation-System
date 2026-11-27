@@ -1,0 +1,407 @@
+/* ---------- Steps ---------- */
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 26px 0 14px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.step:first-child {
+  margin-top: 0;
+}
+
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+  color: #fff;
+  background: #111;
+  border-radius: 50%;
+}
+
+.hint {
+  font-size: 13px;
+  font-weight: 400;
+  color: #666;
+  margin-left: 4px;
+}
+
+/* ---------- Templates ---------- */
+.templates {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.template {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 81px;
+  padding: 15px 16px;
+  background: #fff;
+  border: 1px solid #dcdcd8;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.template input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.templateOn {
+  background: #fff3bd;
+  border: 2px solid #111;
+  padding: 14px 15px;
+}
+
+.template:has(input:focus-visible) {
+  outline: 2px solid #ffd102;
+  outline-offset: 2px;
+}
+
+.radio {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  background: #fff;
+  border: 1.5px solid #555;
+  border-radius: 50%;
+}
+
+.templateOn .radio {
+  border: 6px solid #111;
+}
+
+.templateName {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 17px;
+}
+
+.templateMeta {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* ---------- Form ---------- */
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 17px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 13px;
+}
+
+.req {
+  color: #c0392b;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  height: 40px;
+  padding: 0 13px;
+  font: inherit;
+  font-size: 15px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #dcdcd8;
+  border-radius: 4px;
+}
+
+.field select {
+  appearance: none;
+  padding-right: 36px;
+}
+
+.field input::placeholder {
+  color: #999;
+}
+
+.field input:focus-visible,
+.field select:focus-visible {
+  outline: 2px solid #ffd102;
+}
+
+.readonly {
+  background: #f1f1ef !important;
+}
+
+.invalid {
+  background: #fff5f5 !important;
+  border-color: #c0392b !important;
+}
+
+.error {
+  font-size: 12px;
+  color: #c0392b;
+}
+
+.selectWrap {
+  position: relative;
+  display: block;
+}
+
+.chev {
+  position: absolute;
+  right: 13px;
+  top: 12px;
+  pointer-events: none;
+}
+
+/* ---------- Attached documents ---------- */
+.attached {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doc {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 14px;
+  font-size: 14px;
+  border: 1px solid #dcdcd8;
+  border-radius: 4px;
+}
+
+.docText {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.docText b {
+  margin-right: 6px;
+}
+
+.remove {
+  padding: 0 4px;
+  font-size: 20px;
+  line-height: 1;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.addBtn:focus-visible,
+.remove:focus-visible,
+.generateBtn:focus-visible,
+.openBtn:focus-visible,
+.anotherBtn:focus-visible {
+  outline: 2px solid #ffd102;
+  outline-offset: 2px;
+}
+
+/* ---------- Right column ---------- */
+.alert {
+  padding: 18px 20px;
+  color: #b3261e;
+  background: #fbe4e4;
+  border-radius: 12px;
+}
+
+.alertTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.alert ul {
+  list-style: disc;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.alertNote {
+  margin: 8px 0 0;
+  font-size: 12px;
+}
+
+.generate {
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.generateBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 40px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  background: #ffd102;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.generateBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.generateNote {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 17px;
+  color: #666;
+}
+
+.generateNote b {
+  font-weight: 600;
+}
+
+.result {
+  padding: 20px;
+  background: #fff;
+  border: 1.5px dashed #cfcfca;
+  border-radius: 12px;
+}
+
+.shown {
+  display: inline-block;
+  padding: 3px 11px;
+  font-size: 12px;
+  background: #ececea;
+  border-radius: 999px;
+}
+
+.created {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 14px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: #1d6b3a;
+  background: #dff1e5;
+  border-radius: 50%;
+}
+
+.resultCode {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.registered {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #2c4fa3;
+  background: #e3edff;
+  border-radius: 999px;
+}
+
+.resultTitle {
+  margin: 16px 0 12px;
+  font-size: 14px;
+}
+
+.resultMeta {
+  margin: 0 0 16px;
+  font-size: 12px;
+  color: #666;
+}
+
+.openBtn,
+.anotherBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 40px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.openBtn {
+  background: #ffd102;
+  border: 1px solid #111;
+}
+
+.anotherBtn {
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #dcdcd8;
+}
+
+@media (max-width: 760px) {
+  .templates {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

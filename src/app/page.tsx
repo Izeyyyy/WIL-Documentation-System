@@ -5,8 +5,18 @@ import LoginForm, { INACTIVITY_MINUTES } from "@/modules/login/LoginForm";
 import Dashboard from "@/modules/dashboard/Dashboard";
 import MasterList from "@/modules/masterlist/MasterList";
 import ReviewNewDocuments from "@/modules/review/ReviewNewDocument";
+import IncompleteRecords from "@/modules/incomplete/IncompleteRecords";
+import GenerateReport from "@/modules/generate/GenerateReport";
+import ReportTemplates from "@/modules/templates/ReportTemplates";
 
-type Page = "dashboard" | "masterlist" | "review";
+type Page = "dashboard" | "masterlist" | "review" | "incomplete" | "generate" | "templates";
+
+const PAGES: Page[] = ["dashboard", "masterlist", "review", "incomplete", "generate", "templates"   ];
+
+// DEV ONLY: skip the login and go straight to the app.
+// Set to false (or delete these two lines) before you push.
+const SKIP_LOGIN = process.env.NODE_ENV === "development" && true;
+const DEV_ROLE = "admin"; // or "staff"
 
 export default function Home() {
   // undefined = still checking the session, null = signed out.
@@ -14,6 +24,10 @@ export default function Home() {
   const [page, setPage] = useState<Page>("dashboard");
 
   useEffect(() => {
+    if (SKIP_LOGIN) {
+      setMe({ role: DEV_ROLE });
+      return;
+    }
     fetch("/api/auth/me")
       .then((res) => (res.ok ? res.json() : null))
       .then((body) => setMe(body?.data ?? null))
@@ -22,7 +36,7 @@ export default function Home() {
 
   // Sign out after INACTIVITY_MINUTES with no input.
   useEffect(() => {
-    if (!me) return;
+    if (!me || SKIP_LOGIN) return;
 
     let timer: ReturnType<typeof setTimeout>;
     const signOut = async () => {
@@ -44,12 +58,10 @@ export default function Home() {
     };
   }, [me]);
 
-  // `p` is optional so this is assignable to both `() => void`
-  // and `(page: string) => void` prop types.
+  // Ignores keys for pages that don't exist yet (templates, users, ...).
   const navigate = (p?: string) => {
-    if (p === "dashboard" || p === "masterlist" || p === "review") {
-      setPage(p);
-    }
+    if (p === undefined) return;
+    if ((PAGES as string[]).includes(p)) setPage(p as Page);
   };
 
   if (me === undefined) return null;
@@ -60,8 +72,17 @@ export default function Home() {
   if (page === "review") {
     return <ReviewNewDocuments role={role} onNavigate={navigate} />;
   }
+  if (page === "incomplete") {
+    return <IncompleteRecords role={role} onNavigate={navigate} />;
+  }
+  if (page === "generate") {
+    return <GenerateReport role={role} onNavigate={navigate} />;
+  }
   if (page === "masterlist") {
     return <MasterList role={role} onNavigate={navigate} />;
   }
+  if (page === "templates") {
+    return <ReportTemplates role={role} onNavigate={navigate} />;
+  } 
   return <Dashboard role={role} onNavigate={navigate} />;
 }
