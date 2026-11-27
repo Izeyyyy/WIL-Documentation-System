@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getAuditLogs } from "@/lib/services/audit.service";
 import { requireRole } from "@/lib/services/authorization-service";
 import { ApiError } from "@/lib/utils/api-error";
+import { toTimestampRange } from "@/lib/utils/date-range";
 
 const dateSchema = z.union([
   z.iso.date(),
@@ -23,10 +24,6 @@ const querySchema = z
     ({ from, to }) => !from || !to || new Date(from) <= new Date(to),
     { message: "from must be earlier than or equal to to." }
   );
-
-function isDateOnly(value: string): boolean {
-  return /^\d{4}-\d{2}-\d{2}$/.test(value);
-}
 
 export async function GET(request: Request) {
   try {
@@ -53,16 +50,7 @@ export async function GET(request: Request) {
     const { page, pageSize, from, to, ...filters } = parsed.data;
     const data = await getAuditLogs(page, pageSize, {
       ...filters,
-      from: from
-        ? isDateOnly(from)
-          ? `${from}T00:00:00.000Z`
-          : from
-        : undefined,
-      to: to
-        ? isDateOnly(to)
-          ? `${to}T23:59:59.999Z`
-          : to
-        : undefined,
+      ...toTimestampRange(from, to),
     });
 
     return NextResponse.json({ data, error: null });
